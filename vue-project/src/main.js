@@ -11,3 +11,6 @@ app.use(VueSweetalert2);
 
 app.mount('#app');
 import "bootstrap/dist/js/bootstrap.js";
+
+import Swal from "sweetalert2";
+window.Swal = Swal;

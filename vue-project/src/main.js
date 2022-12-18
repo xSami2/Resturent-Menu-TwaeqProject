@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import { BootstrapIconsPlugin } from 'bootstrap-icons-vue';
+
 import App from './App.vue'
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -8,7 +10,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 const app = createApp(App)
 
 app.use(VueSweetalert2);
-
+app.use(BootstrapIconsPlugin);
 app.mount('#app');
 import "bootstrap/dist/js/bootstrap.js";
 

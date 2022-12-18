@@ -3,9 +3,10 @@ import {ref} from "vue";
 
 let props = defineProps({
   image : String ,
-  description : String,
+  name: String,
   price       :Number ,
-  CheckSumPrice : Number
+  CountDishes : Number,
+  NumberOfOrder : Number
 });
 let Count = ref(0);
 
@@ -16,33 +17,36 @@ let Count = ref(0);
 
 <template>
 
-    <div class="row mt-1">
+    <div class="row mt-1 text-center">
 
-      <div class="col-2">
-        <img style="width: 220px;height: 130px" :src="props.image" alt="">
-      </div>
-
-      <div class="col-7 bg-light bg-gradient">
-        {{props.description}}
+      <div class="col-1">
+      <p>{{ NumberOfOrder}}</p>
       </div>
 
       <div class="col-3">
+        <img style="width: 220px;height: 130px" :src="props.image" alt="">
+      </div>
 
-        <div class="d-flex">
-          <button
-              class="btn btn-success"
+      <div class="col-2">
+        {{props.name }}
+      </div>
 
-          >اضف للسلة</button>
-          <h6 class="px-4"> السعر : {{props.price}}  ريال</h6>
+      <div class="col-2">
+        {{props.price}}
+      </div>
 
-        </div>
+
+      <div class="col-2">
+        <button class="btn btn-success">اضف للسلة</button>
+      </div>
+
+      <div class="col-2">
+
+        {{props.CountDishes}}
 
       </div>
 
     </div>
-
-
-
 </template>
 
 

@@ -7,27 +7,36 @@ import {ref} from "vue";
 let CheckSumPrice = ref(0);
 let Count = ref(0);
 
-let MenuPrice = {
-  HamburgerMeat : 30 ,
-  HamburgerChinkn : 40 ,
-  HamburgerVegtible : 50
-}
-let CountDishes = {
-  HamburgerMeat : 0 ,
-  HamburgerChinkn : 0 ,
-  HamburgerVegtible : 0 ,
-  SumOfOrder : function (){
-    return this.HamburgerMeat + this.HamburgerChinkn + this.HamburgerVegtible;
-  },
-  Restorder : function (){
 
-    return this.HamburgerMeat = 0 , this.HamburgerChinkn = 0 ,this.HamburgerVegtible = 0 ;
-  },
+let Menu = {
+
+CountDishes : {
+ HamburgerMeat : 0 ,
+ HamburgerChinkn : 0 ,
+ HamburgerVegtible : 0 ,
+},
+PriceDishes : {
+  HamburgerMeat : 30,
+  HamburgerChinkn : 40,
+  HamburgerVegtible : 50 ,
+},
+
+
+
+  SumOfOrder : function (){
+    return this.CountDishes.HamburgerMeat + this.CountDishes.HamburgerChinkn + this.CountDishes.HamburgerVegtible;
+  }, // العدد الكلي للاطباق
+  Restorder : function (){
+    return this.CountDishes.HamburgerMeat = 0 , this.CountDishes.HamburgerChinkn = 0 , this.CountDishes.tHamburgerVegtible = 0 ;
+  },  // تصفير عدد الاطباق
+
 }
 
 function CheckSum(Price){
   CheckSumPrice.value +=Price ;
 }
+
+
 function ConfirmOrder(){
   Swal.fire({
     icon: 'success',
@@ -44,13 +53,11 @@ function ConfirmOrder(){
   <NavbarWebsite/>
 
 
-
-
-      <h1 class="text-center mt-5">قائمة الطلبات</h1>
+      <h1 class="text-center mt-5 fw-bold">قائمة الطلبات</h1>
 
 <div class="container  border rounded mt-3 ">
 
-<div class="row p-1 text-center">
+<div class="row p-1 text-center fw-bold">
   <div class="col-1">#</div>
   <div class="col-3 ">صورة الصنف</div>
   <div class="col-2">اسم الصنف</div>
@@ -60,38 +67,34 @@ function ConfirmOrder(){
 </div>
   <hr/>
 
+
   <MenuItem
   image="https://www.chicken.ca/wp-content/uploads/2013/05/Moist-Chicken-Burgers-1180x580.jpg"
-   name="برجر دجاج"
-  :price="MenuPrice.HamburgerChinkn"
-  :CountDishes="CountDishes.HamburgerChinkn"
+  name="برجر دجاج"
   :NumberOfOrder="1"
-  @click="CheckSum(MenuPrice.HamburgerChinkn); CountDishes.HamburgerChinkn++"
-
+  :price="Menu.PriceDishes.HamburgerChinkn"
+  :CountDishes="Menu.CountDishes.HamburgerChinkn"
+  @click="CheckSum(Menu.PriceDishes.HamburgerMeat); Menu.CountDishes.HamburgerChinkn++"
+  :Menu="Menu"
  />
-  <hr/>
-  <MenuItem
 
-      image="https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1-500x500.jpg"
-      name="برجر لحم"
-      :price="MenuPrice.HamburgerMeat"
-      :CountDishes="CountDishes.HamburgerMeat"
-      :NumberOfOrder="2"
-      @click="CheckSum(MenuPrice.HamburgerMeat) ; CountDishes.HamburgerMeat++"
 
-  />
+
 
 
 
 
 
 </div>
+
+  <div v-if="CheckSumPrice !== 0">
    <div class="d-flex justify-content-center mt-3">
-  <h4>   السعر الكلي : {{CheckSumPrice }} </h4>
+     <h4>   السعر الكلي : {{ CheckSumPrice}} </h4>
    </div>
-  <h4 class="text-center mt-2">  العدد الكلي للاطباق : {{CountDishes.SumOfOrder()}} </h4>
+  <h4 class="text-center mt-2">   عدد الاطباق الكلي : {{Menu.SumOfOrder()}}  </h4>
+  </div>
   <div class="d-flex justify-content-center mt-3">
-    <button class="btn btn-success mx-4" @click="CheckSumPrice = 0 ;CountDishes.Restorder()">  احذف الطلبات </button>
+    <button class="btn btn-success mx-4" @click="CheckSumPrice = 0 ;Menu.Restorder()">  احذف الطلبات </button>
     <button class="btn btn-primary" @click="ConfirmOrder">تاكيد الطلب</button>
   </div>
 

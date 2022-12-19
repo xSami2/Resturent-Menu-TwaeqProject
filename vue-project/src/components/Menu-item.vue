@@ -6,7 +6,8 @@ let props = defineProps({
   name: String,
   price       :Number ,
   CountDishes : Number,
-  NumberOfOrder : Number
+  NumberOfOrder : Number,
+  Menu : Object
 });
 let Count = ref(0);
 
@@ -28,7 +29,8 @@ let Count = ref(0);
       </div>
 
       <div class="col-2">
-        {{props.name }}
+        {{props.name}}
+
       </div>
 
       <div class="col-2">
@@ -47,6 +49,7 @@ let Count = ref(0);
       </div>
 
     </div>
+
 </template>
 
 
